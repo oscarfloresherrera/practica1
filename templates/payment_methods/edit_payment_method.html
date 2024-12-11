@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Editar Método de Pago{% endblock %}
+
+{% block content %}
+    <h1>Editar Método de Pago</h1>
+    <form action="{{ url_for('edit_payment_method', id=payment_method.PK_paymentMethod) }}" method="POST">
+        <div class="mb-3">
+            <label for="name" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="name" name="name" value="{{ payment_method.name }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="anotherDetails" class="form-label">Detalles Adicionales</label>
+            <textarea class="form-control" id="anotherDetails" name="anotherDetails">{{ payment_method.anotherDetails }}</textarea>
+        </div>
+        <button type="submit" class="btn btn-warning">Actualizar</button>
+        <a href="{{ url_for('index_payment_methods') }}" class="btn btn-secondary">Cancelar</a>
+    </form>
+{% endblock %}

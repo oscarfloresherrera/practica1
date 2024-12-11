@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Agregar Detalle de Venta{% endblock %}
+
+{% block content %}
+    <h1>Agregar Detalle de Venta</h1>
+    <form action="{{ url_for('add_detail') }}" method="POST">
+        <div class="mb-3">
+            <label for="FK_bill" class="form-label">Factura</label>
+            <select class="form-select" name="FK_bill" required>
+                <option value="" disabled selected>Seleccione una factura</option>
+                {% for bill in bills %}
+                <option value="{{ bill.PK_bill }}">{{ bill.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="FK_producto" class="form-label">Producto</label>
+            <select class="form-select" name="FK_producto" required>
+                <option value="" disabled selected>Seleccione un producto</option>
+                {% for product in products %}
+                <option value="{{ product.PK_product }}">{{ product.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    </form>
+{% endblock %}

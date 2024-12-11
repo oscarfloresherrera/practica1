@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Agregar Método de Pago{% endblock %}
+
+{% block content %}
+    <h1>Agregar Nuevo Método de Pago</h1>
+    <form action="{{ url_for('add_payment_method') }}" method="POST">
+        <div class="mb-3">
+            <label for="name" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+        <div class="mb-3">
+            <label for="anotherDetails" class="form-label">Detalles Adicionales</label>
+            <textarea class="form-control" id="anotherDetails" name="anotherDetails"></textarea>
+        </div>
+        <button type="submit" class="btn btn-success">Guardar</button>
+        <a href="{{ url_for('index_payment_methods') }}" class="btn btn-secondary">Cancelar</a>
+    </form>
+{% endblock %}

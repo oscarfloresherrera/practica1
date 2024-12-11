@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Lista de Facturas{% endblock %}
+
+{% block content %}
+<h1 class="my-4">Lista de Facturas</h1>
+
+<a href="{{ url_for('add_bill') }}" class="btn btn-primary mb-3">Agregar Nueva Factura</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Cliente</th>
+            <th>Método de Pago</th>
+            <th>Fecha de Creación</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for bill in bills %}
+            <tr>
+                <td>{{ bill.PK_bill }}</td>
+                <td>{{ bill.client.firstName }} {{ bill.client.lastName }}</td>
+                <td>{{ bill.payment_method.name }}</td>
+                <td>{{ bill.createdAt }}</td>
+                <td>
+                    <a href="{{ url_for('edit_bill', id=bill.PK_bill) }}" class="btn btn-warning btn-sm">Editar</a>
+                    <a href="{{ url_for('bill', id=bill.PK_bill) }}" class="btn btn-info btn-sm">Ver</a>
+                    <a href="{{ url_for('bill_pdf', id=bill.PK_bill) }}" class="btn btn-success btn-sm" target="_blank">PDF</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

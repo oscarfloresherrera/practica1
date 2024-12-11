@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Detalles de Venta{% endblock %}
+
+{% block content %}
+    <h1>Detalles de Venta</h1>
+    <a href="{{ url_for('add_detail') }}" class="btn btn-primary">Agregar Detalle de Venta</a>
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Factura</th>
+                <th>Producto</th>
+                <th>Fecha de Creación</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for detail in details %}
+            <tr>
+                <td>{{ detail.PK_detail }}</td>
+                <td>{{ detail.bill.name }}</td>
+                <td>{{ detail.product.name }}</td>
+                <td>{{ detail.createdAt }}</td>
+                <td>{{ detail.state }}</td>
+                <td>
+                    <a href="{{ url_for('edit_detail', id=detail.PK_detail) }}" class="btn btn-warning">Editar</a>
+                    <form action="{{ url_for('delete_detail', id=detail.PK_detail) }}" method="POST" style="display:inline;">
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

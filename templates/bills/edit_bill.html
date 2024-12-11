@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Editar Factura{% endblock %}
+
+{% block content %}
+<h1 class="my-4">Editar Factura</h1>
+
+<form method="POST">
+    <div class="mb-3">
+        <label for="FK_client" class="form-label">Cliente</label>
+        <select name="FK_client" id="FK_client" class="form-select" required>
+            <option value="">Seleccionar Cliente</option>
+            {% for client in clients %}
+                <option value="{{ client.PK_client }}" {% if client.PK_client == bill.FK_client %}selected{% endif %}>
+                    {{ client.firstName }} {{ client.lastName }}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+    
+    <div class="mb-3">
+        <label for="FK_paymentMethod" class="form-label">Método de Pago</label>
+        <select name="FK_paymentMethod" id="FK_paymentMethod" class="form-select" required>
+            <option value="">Seleccionar Método</option>
+            {% for method in payment_methods %}
+                <option value="{{ method.PK_paymentMethod }}" {% if method.PK_paymentMethod == bill.FK_paymentMethod %}selected{% endif %}>
+                    {{ method.name }}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Actualizar Factura</button>
+    <a href="{{ url_for('index_bills') }}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

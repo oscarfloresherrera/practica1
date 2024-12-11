@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Agregar Nueva Factura{% endblock %}
+
+{% block content %}
+<h1>Agregar Nueva Factura</h1>
+<form action="{{ url_for('add_bill') }}" method="POST">
+    <div class="mb-3">
+        <label for="FK_client" class="form-label">Cliente</label>
+        <select class="form-select" id="FK_client" name="FK_client" required>
+            <option value="" disabled selected>Seleccionar Cliente</option>
+            {% for client in clients %}
+                <option value="{{ client.PK_client }}">
+                    {{ client.firstName }} {{ client.lastName }}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="FK_paymentMethod" class="form-label">Método de Pago</label>
+        <select class="form-select" id="FK_paymentMethod" name="FK_paymentMethod" required>
+            <option value="" disabled selected>Seleccionar Método de Pago</option>
+            {% for payment_method in payment_methods %}
+                <option value="{{ payment_method.PK_paymentMethod }}">
+                    {{ payment_method.name }}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a href="{{ url_for('index_bills') }}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}
